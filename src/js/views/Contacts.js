@@ -9,7 +9,7 @@ export default class Contacts extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			id: "",
+			id: null,
 			showModal: false
 		};
 	}

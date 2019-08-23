@@ -65,7 +65,7 @@ export default class AddContact extends React.Component {
 											let person = {
 												full_name: this.state.fullName,
 												email: this.state.email,
-												agenda_slug: "my_agenda_slug",
+												//agenda_slug: "my_agenda_slug",
 												address: this.state.address,
 												phone: this.state.phone
 											};

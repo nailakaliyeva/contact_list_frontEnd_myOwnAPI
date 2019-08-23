@@ -8,7 +8,7 @@ const getState = ({ getStore, setStore }) => {
 			addContact: object => {
 				// let store = getStore();
 				// setStore({ contacts: store.contacts.concat(object) });
-				fetch("https://assets.breatheco.de/apis/fake/contact/", {
+				fetch("https://3000-a7599e8b-6013-4b02-9add-db43b0974098.ws-us0.gitpod.io/contact", {
 					method: "post",
 					headers: {
 						"Content-Type": "application/json"
@@ -16,7 +16,7 @@ const getState = ({ getStore, setStore }) => {
 					body: JSON.stringify(object)
 				})
 					.then(() => {
-						fetch("https://assets.breatheco.de/apis/fake/contact/agenda/my_agenda_slug")
+						fetch("https://3000-a7599e8b-6013-4b02-9add-db43b0974098.ws-us0.gitpod.io/contact")
 							.then(response => response.json())
 							.then(data => setStore({ contacts: data.reverse() }))
 							.catch(err => console.error(err));
@@ -25,27 +25,25 @@ const getState = ({ getStore, setStore }) => {
 			},
 			deleteContact: id => {
 				console.log("delete was successfully called for id", id);
-				fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
+				fetch("https://3000-a7599e8b-6013-4b02-9add-db43b0974098.ws-us0.gitpod.io/update/" + id, {
 					method: "DELETE"
-				})
-					.then(response => response.json())
-					.then(data => {
-						console.log("the data came back from the server after successfull deletion");
-						setStore({ contacts: data.reverse() });
-					})
-
-					.then(window.location.reload())
-					.catch(err => console.error(err));
+				}).then(() => {
+					fetch("https://3000-a7599e8b-6013-4b02-9add-db43b0974098.ws-us0.gitpod.io/contact")
+						.then(response => response.json())
+						.then(data => {
+							setStore({ contacts: data.reverse() });
+						});
+				});
 			},
 			updateContact: obj => {
-				fetch("https://assets.breatheco.de/apis/fake/contact/" + obj.id, {
+				fetch("https://3000-a7599e8b-6013-4b02-9add-db43b0974098.ws-us0.gitpod.io/update/" + obj.id, {
 					method: "PUT",
 					headers: {
 						"Content-Type": "application/json"
 					},
 					body: JSON.stringify(obj)
 				}).then(() => {
-					fetch("https://assets.breatheco.de/apis/fake/contact/agenda/my_agenda_slug")
+					fetch("https://3000-a7599e8b-6013-4b02-9add-db43b0974098.ws-us0.gitpod.io/contact")
 						.then(response => response.json())
 						.then(data => {
 							setStore({ contacts: data.reverse() });
